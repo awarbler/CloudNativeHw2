@@ -1,0 +1,126 @@
+<!DOCTYPE html> <!-- HTML5 doctype -->
+<html lang="en"> <!-- Page language -->
+<head> <!-- Metadata section -->
+    <meta charset="UTF-8" /> <!-- Character encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Mobile friendly scaling -->
+    <meta name="description" content="AJW4987 personal website for ECE 382V React HW Task 1: HTML/CSS fundamentals deployed on GitHub Pages."/> <!-- description -->
+    <title>Personal Website</title> <!-- Browser tab title -->
+    <link rel="stylesheet" href="stylesheet.css" /> <!-- external CSS -->
+</head> <!-- End head -->
+
+<body> <!-- Visible page content starts -->
+
+    <header class="site-header"> <!-- Top site header -->
+        <div class="header-inner"> <!-- Grid container for logo + nav -->
+
+            <div class="brand-block"> <!-- Left side title block -->
+                <img src="images/profile.jpeg" alt="Anita Woodford" class="header-profile" /> <!-- Profile image -->
+                <h1 class="site-title">My Portfolio</h1> <!-- Main title -->
+                <p class="site-kicker">Anita Woodford</p> <!--Name line-->
+                <p class="site-subtitle">ECE 382V HW Task 1</p> <!--subtitle -->
+            </div> <!-- End brand block -->
+
+            <div class="nav-wrap"> <!-- Right side nav block -->
+
+                <input type="checkbox" id="nav-toggle" class="nav-toggle" /> <!-- Hidden checkbox for toggling nav on small screens -->
+
+                <label for="nav-toggle" class="hamburger" aria-label="Open Menu"> <!-- Hamburger menu label -->
+                    <span class="hamburger-icon" aria-hidden="true"> <!-- Hamburger icon container -->
+                        <span class="hamburger-line"></span> <!-- Hamburger line 1 -->
+                        <span class="hamburger-line"></span> <!-- Hamburger line 2 -->
+                        <span class="hamburger-line"></span> <!-- Hamburger line 3 -->
+                    </span> <!-- End hamburger icon -->
+                    <span class="hamburger-text">MENU</span> <!-- Text for screen readers -->
+                </label><!-- End hamburger label -->
+
+                <nav class="top-nav" aria-label="Primary navigation"> <!-- Navigation bar -->
+                    <a class="nav-link is-active" href="#home">HOME</a> <!-- Home-->
+                    <a class="nav-link" href="#about-section">ABOUT ME</a> <!--  About section -->
+                    <a class="nav-link" href="#senior-project">SENIOR PROJECT</a> <!-- Senior Project -->
+                    <a class="nav-link" href="#current-classes">CURRENT CLASSES</a> <!-- Classes -->
+                    <a class="nav-link" href="https://coherent-care-e87.notion.site/Anita-Woodford-008e313372e844e391406a292a09fc79" target="_blank" rel="noreferrer">E-PORTFOLIO</a> <!-- External link -->
+                    <a class="nav-link" href="https://awarbler.github.io/">ASSIGNMENTS</a>
+                    <a class="nav-link" href="#contact">CONTACT</a> <!-- Contact -->
+                </nav> <!-- End nav -->
+
+            </div> <!-- End nav-wrap -->
+
+        </div> <!-- End header-inner -->
+    </header> <!-- End header -->
+
+    <main> <!-- Main content wrapper -->
+
+        <div id="home" class="content-section"> <!-- HOME section -->
+            <div class="container"> <!-- Centered width wrapper -->
+                <h2>Welcome</h2> <!-- Section heading -->
+                <p>Welcome to my personal website showcasing my projects and skills. Use the menu to jump to sections.</p> <!-- Intro text -->
+            </div> <!-- End container -->
+        </div> <!-- End home -->
+
+        <div id="about-section" class="content-section"> <!-- Required div + required id selector -->
+            <div class="container"> <!-- Width wrapper -->
+                <h2>About Me</h2> <!-- Section heading -->
+                <p> <!-- Paragraph start -->I am a motivated, detail-oriented learner who has built a strong technical foundation through my Bachelor of Science in Software Engineering at Brigham Young University–Idaho, where I graduated with a 3.963 GPA and led an embedded IoT thermostat senior project using Arduino, C++, sensors, and cloud integration.</p> <!-- Paragraph end -->
+                <p> <!-- Paragraph start -->I’m currently a graduate student working through web fundamentals so I can build React apps with a strong foundation.</p> <!-- Paragraph end -->
+            </div> <!-- End container -->
+        </div> <!-- End about section -->
+
+        <div id="senior-project" class="content-section"> <!-- Senior Project section -->
+            <div class="container"> <!-- Width wrapper -->
+                <h2>Senior Project</h2> <!-- Section heading -->
+                <p>For my senior project, I led a team in developing an embedded IoT thermostat using Arduino and C++. We integrated sensors to monitor temperature and humidity and implemented cloud connectivity for remote access.</p> <!-- Project description -->
+                <p>This section can be expanded later with a feature list and your specific contributions.</p> <!-- Placeholder -->
+            </div> <!-- End container -->
+        </div> <!-- End senior project -->
+
+        <div id="current-classes" class="content-section"> <!-- Current Classes section -->
+            <div class="container"> <!-- Width wrapper -->
+                <h2>Current Classes</h2> <!-- Section heading -->
+                <ul class="simple-list"> <!-- List of classes -->
+                    <li>ECE 382V - Cloud Native App Development</li> <!-- Class item -->
+                    <li>ECE 382V - Software Testing</li> <!-- Class item -->
+                </ul> <!-- End list -->
+            </div> <!-- End container -->
+        </div> <!-- End current classes -->
+
+        <div class="content-section"> <!-- Links section -->
+            <div class="container"> <!-- Width wrapper -->
+                <h2>Links</h2> <!-- Section heading -->
+                <p>My Resume / E-Portfolio:<a class="external-link" href="https://coherent-care-e87.notion.site/Anita-Woodford-008e313372e844e391406a292a09fc79" target="_blank" rel="noreferrer">E-Portfolio</a></p> <!-- External link -->
+                <p>GitHub Repositories:<a class="external-link" href="https://github.com/awarbler?tab=repositories" target="_blank" rel="noreferrer">GitHub</a></p> <!-- External link -->
+            </div> <!-- End container -->
+        </div> <!-- End links section -->
+
+    </main> <!-- End main -->
+
+    <footer id="contact" class="site-footer"> <!-- Footer wrapper -->
+        <div class="footer-inner"> <!-- Two-column footer container -->
+
+ <div class="footer-col"> <!-- Left column: CONTACT -->
+                <p class="footer-heading">CONTACT</p> <!-- Orange heading -->
+                <p class="footer-text">Anita Woodford</p> <!-- Your name -->
+                <p class="footer-text">Austin, Texas</p> <!-- Your location -->
+            </div> <!-- End left column -->
+
+            <div class="footer-col"> <!-- Right column: SOCIAL MEDIA -->
+                <p class="footer-heading">SOCIAL MEDIA</p> <!-- Replaces Categories -->
+                <ul class="footer-list"> <!-- List of links -->
+                    <li class="footer-list-item"><a class="footer-link" href="https://www.facebook.com" target="_blank" rel="noreferrer">Facebook</a></li>
+                    <li class="footer-list-item"><a class="footer-link" href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
+                    <li class="footer-list-item"><a class="footer-link" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a></li>
+                </ul>
+            </div> <!-- End right column -->
+
+        </div> <!-- End footer-inner -->
+
+        <div class="footer-bottom"> <!-- Bottom footer strip -->
+            <p class="footer-small">© 2025 <a href="https://awarbler.github.io" class="footer-name-link">Anita Woodford.</a> | Deployed with GitHub Pages. |  University of Texas at Austin. | Graduate Student | All rights reserved. Last Modified:
+                <span id="dateModified"></span></p>
+                <script>document.getElementById("dateModified").innerHTML = document.lastModified</script> <!-- Copyright -->
+        </div> <!-- End footer-bottom -->
+
+    </footer> <!-- End footer -->
+
+</body> <!-- End body -->
+</html> <!-- End html -->
+
