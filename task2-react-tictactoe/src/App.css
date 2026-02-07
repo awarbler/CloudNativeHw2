@@ -1,47 +1,92 @@
-.app {
-  padding: 24px; /* Add padding to the app container */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-/* style each row of the board */
-.board-row { /* container for each row of the tic-tac-toe board */
-  display: flex; /* use flexbox to arrange cells in a row */
-}
-
-/* style each square of the board */
-.square { /* individual cell of the tic-tac-toe board */
-  width: 80px; /* set width of each square */
-  height: 80px; /* set height of each square */
-  font-size: 24px; /* increase font size for X and O */
-  font-weight: bold; /* make X and O bold */
-  background: white; /* set background color to white */
-  cursor: pointer; /* change cursor to pointer on hover */
-  border: 1px solid #999; /* add a border around each square */
-}
-
-/*remove default button outline */
-.square:focus {
-  outline: none;
-}
-
-.status{ 
-  margin-bottom: 16px; /* add space below the status text */
-  font-size: 18px; /* increase font size for status text */
-
-}
-
 .game {
-  display: flex; /* use flexbox to arrange game board and info side by side */
-  gap: 24px; /* add space between game board and info */
+  max-width: 1200px;
+  margin: 40px auto; /* center the game dd vertical margin */
+  padding: 0 16px; /* add horizontal padding for small screens */
+
+  display: flex; /*  board and moves side by side */
+  grid-template-columns: 1fr auto 280px; /* board takes remaining space, moves column is fixed width */ 
+  column-gap: 28px; /* add space between columns */
+  gap: 28px; /* add space between columns */
+  align-items: flex-start; /* align top edges*/
 }
 
 .game-board {
-
+  display: flex; /* use flexbox to arrange title and board vertically */
+  flex-direction: column; /* stack title and board vertically */
+  align-items: center; /* center title and board horizontally */
+}
+.game-board h1 {
+  margin: 0; /* remove default margin from h1 */
+  font-size: 42px; /* increase font size for the title */
+  line-height: 1.1; /* adjust line height for better spacing */
 }
 .game-info {
-
+  width: 280px;
 }
 
-.game-info ol {
+.game-info ol {/*ordered list*/
   padding-left: 20px; /* add padding to the left of the move list */
 }
+
+.game-info li { /*each move row*/
+  margin-bottom: 10px;
+}
+
+.game-info button { /* buttons in the move list*/
+  width: 100%; /* make buttons full width of the move list */
+
+  padding: 10px 12px; /* add padding to the buttons */
+  border: 1px solid #d0d7de; /* add a light border to the buttons */
+  border-radius: 10px; /* round the corners of the buttons */
+  background: #ffffff; /* set background color to white */
+  font-size: 14px; /* increase font size for buttons */
+  cursor: pointer; /* change cursor to pointer on hover */
+}
+.game-info button:hover { /* hover effect for move buttons */
+  background: #f0f0f0; /* change background color on hover */
+}
+
+.status {
+  margin: 10px 0 14px 0; /* add space below the status text */
+  font-size: 18px; /* increase font size for status text */
+  text-align: center; /* center the status text */
+}
+
+.board-row {
+  display: flex; /* use flexbox to arrange cells in a row */
+  justify-content: center; /* center the cells horizontally */
+}
+/* style each square of the board */
+.square { /* individual cell of the tic-tac-toe board */
+  width: 84px; /* set width of each square */
+  height: 84px; /* set height of each square */
+  font-size: 30px; /* increase font size for X and O */
+  font-weight: 700; /* make X and O bold */
+  border: 1px solid #c7c7c7; /* add a light border to the squares */
+  border-radius: 10px; /* round the corners of the squares */
+  background: white; /* set background color to white */
+  display: flex; /* use flexbox to center content */
+  align-items: center; /* vertically center X and O */
+  justify-content: center; /* horizontally center X and O */
+  cursor: pointer; /* change cursor to pointer on hover */
+}
+
+@media (max-width: 600px) { /* responsive styles for small screens */
+  .game {
+    flex-direction: column; /* stack board and moves vertically */
+    align-items: center; /* center items horizontally */
+    padding: 0 16px; /* reduce horizontal padding */
+  }
+  .game-board {
+    margin-bottom: 24px; /* add space below the board */
+  }
+  .game-info {
+    width: 100%; /* make game info full width */
+    max-width: 320px; /* limit max width for readability */
+
+  }
+}
+
+
+
+
