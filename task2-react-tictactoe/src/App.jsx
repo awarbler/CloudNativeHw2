@@ -13,23 +13,35 @@ function Square({value, onSquareClick}) { // defines a function component named 
       className="square" 
       onClick={onSquareClick}
     >
-      {value} {/* show a value in each square 1-9*/}
+      {value} {/* null "X" , or "O" */}
       </button>
   );
 }
 
 // define the board component that renders a 3x3 grid of squares
-function Board() { // define the board component that renders a 3x3 grid of squares function handleClick() 
-  const [squares, setSquares] = useState(Array(9).fill(null)); // initializes a state variable named squares with an initial value of an array of 9 null values, and a function named setSquares that can be used to update the value of the state variable 
+function Board() { // start of the board component
+  const [squares, setSquares] = useState(Array(9).fill(null)); // start all squares as null 
+  // state to track whose turn it is 
+  const [xIsNext, setXIsNext] = useState(true); // true --> X turn False --> o turn
 
-  function handleClick(i) { // defines a function named handleClick that will be called when the square is clicked
-    const nextSquares = squares.slice(); // creates a copy of the squares array using the slice method and assigns it to a new variable named nextSquares
-    nextSquares[i] = "X"; // updates the value of the square at index i in the nextSquares array to "X"
-    setSquares(nextSquares); // updates the value of the squares state variable to the new array created in the previous step
+  // Click handler for a square at index i
+  function handleClick(i) { // i is 0....8
+    // if square is filled do nothing
+    if (squares[i]){
+      return; // prevents overwriting
+    }
+    // Make a copy of the array do not mutate state 
+    const nextSquares = squares.slice();
+    // Place an X or O depending on whose turn it is 
+    nextSquares[i] = xIsNext ? "X" : "O"; 
+    // Update the square state
+    setSquares(nextSquares);
+    // Switch turns
+    setXIsNext(!xIsNext);
   }
-
+  // render 3 rows 3 squares
   return (
-    <div>
+    <div> {/* wrapper for the board */}
       <div className="board-row"> {/* first row of the board */}
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} /> {/* square 0 */}
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} /> {/* square 1 */}
@@ -52,7 +64,7 @@ function Board() { // define the board component that renders a 3x3 grid of squa
   );
 }
 
-
+// App renders title and board component
 export default function App() {
   return (
     <div className="app"> {/* top level wrapper */}
