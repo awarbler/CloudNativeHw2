@@ -2,9 +2,11 @@ import React from "react";
 import "./App.css";// loads the CSS file for styling the app
 
 // define a reusable square component that represents each cell in the tic-tac-toe grid
-function Square() { // defines a function component named square
+function Square({value}) { // defines a function component named square
   return ( // returns jsx that renders a button element with the class name "square"
-    <button className="square">X</button> //* temporary: show X so we know it renders */
+    <button className="square">{/* seach squre is a button*/}
+      {value} {/* show a value in each square 1-9*/}
+      </button>
   );
 }
 
@@ -13,19 +15,20 @@ function Board() { // define the board component that renders a 3x3 grid of squa
   return (
     <div>
       <div className="board-row"> {/* first row of the board */}
-        <Square /> {/* square 0 */}
-        <Square /> {/* square 1 */}
-        <Square /> {/* square 2 */}
+        <Square value={1} /> {/* square 0 */}
+        <Square value={2} /> {/* square 1 */}
+        <Square value={3} /> {/* square 2 */}
       </div>
       <div className="board-row"> {/* second row of the board */}
-        <Square /> {/* square 3 */}
-        <Square /> {/* square 4 */}
-        <Square /> {/* square 5 */}
+        <Square value={4} /> {/* square 3 */}
+        <Square value={5} /> {/* square 4 */}
+        <Square value={6} /> {/* square 5 */}
+
       </div>
       <div className="board-row"> {/* third row of the board */}
-        <Square /> {/* square 6 */}
-        <Square /> {/* square 7 */}
-        <Square /> {/* square 8 */}
+        <Square value={7} /> {/* square 6 */}
+        <Square value={8} /> {/* square 7 */}
+        <Square value={9} /> {/* square 8 */}
       </div>
 
     </div>
