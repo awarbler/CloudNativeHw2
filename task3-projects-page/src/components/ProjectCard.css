@@ -5,6 +5,12 @@
     gap: 16px;
 }
 
+.project-title-row {
+  display: flex;          /* place name + users side by side */
+  align-items: baseline;  /* align text like the sketch */
+  gap: 24px;              /* space between name and users */
+}
+
 /*left column name and authorized users  */
 .project-left {
     flex: 1;
@@ -26,6 +32,12 @@
     margin-bottom: 12px;
 }
 
-/* */
-/* */
-/* */
+/* project name stuyling */
+.project-name {
+    font-size: 20px;
+}
+/* Authorized users styling */
+.project-users {
+    color:#666666;
+    font-size: 14px;
+}

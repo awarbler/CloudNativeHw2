@@ -11,9 +11,11 @@ function ProjectCard(props) {
         <CardContent>
             <div className="project-row">
 
-                <div className="project-left">
-                    <div>{project.name}</div>
-                    <div>{project.authorizedUsers}</div>
+                <div className="project-left"> {/* left column container */}
+                    <div className="project-title-row"> {/* name + users in one row */}
+                        <div className="project-name">{project.name}</div> {/* project name */}
+                        <div className="project-users">{project.authorizedUsers}</div> {/* users list */}
+                    </div>
                 </div>
 
                 <div className="project-middle">
@@ -25,9 +27,8 @@ function ProjectCard(props) {
                 <div className="project-right">
                     <Button variant="contained" onClick={() => onToggleJoin(project.id)}>
                         {project.joined ? "Leave" : "Join"}
-                    </Button> 
+                    </Button>
                 </div>
-
             </div>
         </CardContent>
     </Card>
