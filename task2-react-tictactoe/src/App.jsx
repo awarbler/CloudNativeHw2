@@ -3,8 +3,13 @@ import "./App.css";// loads the CSS file for styling the app
 
 // define a reusable square component that represents each cell in the tic-tac-toe grid
 function Square({value}) { // defines a function component named square
+  // define click handler inside of square component
+  function handleClick() { // defines a function named handleClick that will be called when the square is clicked
+    console.log(`Square ${value} clicked!`); // logs a message to the console indicating which square was clicked
+  }
   return ( // returns jsx that renders a button element with the class name "square"
-    <button className="square">{/* seach squre is a button*/}
+    <button className="square" onClick={handleClick}
+    >
       {value} {/* show a value in each square 1-9*/}
       </button>
   );
