@@ -8,6 +8,14 @@ function Projects() { // Define the Projects page component
         { id:"p2", name: "Project Name 2", authorizedUsers: "list, of, authorized, users",joined: true},
         { id:"p3", name: "Project Name 3", authorizedUsers: "list, of, authorized, users",joined: false},
     ]);
+    // Event handler to join or leave a project 
+    function handleToggleJoin(projectId) { // function to toggle join/leave project
+        setProjects((prevProjects) => (
+            prevProjects.map((p) => (
+                p.id === projectId ? { ...p, joined: !p.joined } : p
+            ))
+        ));
+    }
 
     // Render the list of projects in the UI
     return ( // return the UI for the projects page
@@ -15,16 +23,14 @@ function Projects() { // Define the Projects page component
             <h1>Projects</h1> {/* page title */}
             {/*show projects dynamically*/}
             {projects.map((project) => ( 
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard key={project.id} project={project} onToggleJoin={handleToggleJoin}  />
 
             ))}
 
         </div>
         );
-// TODO: Appear on screen.
-// TODO: make it useable in APP.js
-// TODO: Convert to a Project Card
-    
+
+
 }
 
 export default Projects;
