@@ -1,0 +1,31 @@
+/*outer project row container */
+.project-row {
+    display:flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+/*left column name and authorized users  */
+.project-left {
+    flex: 1;
+}
+
+/* middle column  */
+.project-middle {
+    flex:2;
+}
+
+/* right column join leave button*/
+.project-right {
+    display:flex;
+    align-items: flex-start;
+}
+
+/* spacing between cards */
+.project-card {
+    margin-bottom: 12px;
+}
+
+/* */
+/* */
+/* */

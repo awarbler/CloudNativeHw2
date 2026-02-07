@@ -1,0 +1,21 @@
+/* Contain for one hwset row*/
+.hw-row {
+    display:flex;
+    align-items: center;
+    gap:12px; /* space between elements */
+    margin-top: 8px;
+}
+/* HWSet label and count*/
+.hw-label {
+    min-width: 120px
+}
+
+
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
