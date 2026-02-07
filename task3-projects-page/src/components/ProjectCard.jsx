@@ -1,4 +1,5 @@
 import {Card, CardContent, Button} from "@mui/material";
+import HardwareSetRow from "./HardwareSetRow";
 
 function ProjectCard(props) {
     // reusable
@@ -12,6 +13,10 @@ function ProjectCard(props) {
             <Button variant="contained" onClick={() => onToggleJoin(project.id)}>
                 {project.joined ? "Leave" : "Join"}
             </Button>
+            {project.hardwareSets.map((hwSet) => (
+                <HardwareSetRow key={hwSet.id} hwSet={hwSet} />
+            ))}
+    
         </CardContent>
        </Card>
     );
