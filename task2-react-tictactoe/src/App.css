@@ -27,5 +27,21 @@
 .status{ 
   margin-bottom: 16px; /* add space below the status text */
   font-size: 18px; /* increase font size for status text */
-  
+
+}
+
+.game {
+  display: flex; /* use flexbox to arrange game board and info side by side */
+  gap: 24px; /* add space between game board and info */
+}
+
+.game-board {
+
+}
+.game-info {
+
+}
+
+.game-info ol {
+  padding-left: 20px; /* add padding to the left of the move list */
 }
