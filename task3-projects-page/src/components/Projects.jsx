@@ -1,4 +1,5 @@
 import { useState } from "react"; // Make projects in state 
+import ProjectCard from "./ProjectCard";
 
 function Projects() { // Define the Projects page component
     // create "state" to store list of projects.
@@ -14,13 +15,10 @@ function Projects() { // Define the Projects page component
             <h1>Projects</h1> {/* page title */}
             {/*show projects dynamically*/}
             {projects.map((project) => ( 
-                <div key={project.id}> 
-                <div > {project.name} {/* display project name */}</div>
-                <div> {project.authorizedUsers} {/* display authorized users */}</div>
-                <div> {project.joined ? "Joined" : "Not Joined"} {/* display joined status */}</div>
-                </div>
+                <ProjectCard key={project.id} project={project} />
+
             ))}
-            <p> Task 3 Projects page will go here.</p> {/* placeholder text for now */ }
+
         </div>
         );
 // TODO: Appear on screen.
