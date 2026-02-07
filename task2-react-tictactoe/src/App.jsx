@@ -1,16 +1,11 @@
-import React, {useState } from "react"; // imports the useState hook from the react library, which allows us to manage state in our functional components
-
-
+import React, {useState } from "react"; // import react and useState
 import "./App.css";// loads the CSS file for styling the app
 
-// define a reusable square component that represents each cell in the tic-tac-toe grid
+// square is stateless
 function Square({value, onSquareClick}) { // defines a function component named square
-  // create a state for square
-  //const [value , setValue] =useState(null); // initializes a state variable named value with an initial value of null, and a function named setValue that can be used to update the value of the state variable
-  // define click handler inside of square component
   return ( // returns jsx that renders a button element with the class name "square"
-    <button 
-      className="square" 
+    <button
+      className="square"
       onClick={onSquareClick}
     >
       {value} {/* null "X" , or "O" */}
@@ -21,19 +16,33 @@ function Square({value, onSquareClick}) { // defines a function component named 
 // define the board component that renders a 3x3 grid of squares
 function Board() { // start of the board component
   const [squares, setSquares] = useState(Array(9).fill(null)); // start all squares as null 
-  // state to track whose turn it is 
+  // state to track whose turn it is
   const [xIsNext, setXIsNext] = useState(true); // true --> X turn False --> o turn
+  // Determine winner or null if no winner
+  const winner = calculateWinner(squares);
 
+  // Decide what status text to show
+  let status; // declares the status string
+  if(winner){
+    status= "Winner: " + winner; // if there is a winner
+  } else {
+    status = "Next Player: " + (xIsNext? "X" : "O");
+  }
   // Click handler for a square at index i
   function handleClick(i) { // i is 0....8
-    // if square is filled do nothing
+    // stops game if there is a winner
+    if (winner){
+      return; // no further moves are alllowed
+    }
+    // ignore squre if square is filled do nothing
     if (squares[i]){
       return; // prevents overwriting
     }
     // Make a copy of the array do not mutate state 
     const nextSquares = squares.slice();
     // Place an X or O depending on whose turn it is 
-    nextSquares[i] = xIsNext ? "X" : "O"; 
+    nextSquares[i] = xIsNext ? "X" : "O";
+    //
     // Update the square state
     setSquares(nextSquares);
     // Switch turns
@@ -42,6 +51,8 @@ function Board() { // start of the board component
   // render 3 rows 3 squares
   return (
     <div> {/* wrapper for the board */}
+      <div className="status">{status}</div> {/* status text */}
+
       <div className="board-row"> {/* first row of the board */}
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} /> {/* square 0 */}
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} /> {/* square 1 */}
@@ -64,6 +75,28 @@ function Board() { // start of the board component
   );
 }
 
+// Helper function calculate winner 
+function calculateWinner(squares){
+  // all possible winning lines(3 in a row)
+  const lines = [
+    [0,1,2], // top row
+    [3,4,5], // middle row
+    [6,7,8], // bottom row
+    [0,3,6], // left column
+    [1,4,7], // middle column
+    [2,5,8], // right column
+    [0,4,8], // diagonal top-left to bottom-right
+    [2,4,6]  // diagonal top-right to bottom-left
+  ];
+  // check each line to see if there is a winner 
+  for (let i = 0; i <lines.length; i++) { //loop throue each winning line
+    const [a, b, c] = lines[i]; // get the three indexes for each line
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) { 
+      return squares[a]; // return x or O as winner 
+    }
+  }
+  return null; // no winner
+}
 // App renders title and board component
 export default function App() {
   return (
