@@ -25,7 +25,7 @@ function ProjectCard(props) {
                 </div>
 
                 <div className="project-right">
-                    <Button variant="contained" onClick={() => onToggleJoin(project.id)}>
+                    <Button className="join-btn" variant="contained" onClick={() => onToggleJoin(project.id)}>
                         {project.joined ? "Leave" : "Join"}
                     </Button>
                 </div>

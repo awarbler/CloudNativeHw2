@@ -3,6 +3,7 @@
     display:flex;
     justify-content: space-between;
     gap: 16px;
+    align-items: center;
 }
 
 .project-title-row {
@@ -40,4 +41,9 @@
 .project-users {
     color:#666666;
     font-size: 14px;
+}
+
+/* join leave button styling */
+.join-btn {
+    width: 120px;
 }

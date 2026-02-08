@@ -5,14 +5,22 @@
     gap:12px; /* space between elements */
     margin-top: 8px;
 }
+
 /* HWSet label and count*/
 .hw-label {
-    min-width: 120px
+    min-width: 140px
 }
 
 
-/* */
-/* */
+/* wrap the mui input so we can force a consisten width*/
+.hw-qty {
+    width: 80px;
+}
+
+/*make two hw buttons the same width */
+.hw-btn {
+    width: 120px;
+}
 /* */
 /* */
 /* */

@@ -25,9 +25,9 @@ function HardwareSetRow(props) { // one hardware set row
             {/* */}
             <TextField label="Enter qty" size="small" value={qty} onChange={handleQtyChange}/>
             {/* */}
-            <Button variant="contained" onClick={handleCheckInClick}>Check In</Button>
+            <Button className="hw-btn" variant="contained" onClick={handleCheckInClick}>Check In</Button>
             {/* */}
-            <Button variant="contained" onClick={handleCheckOutClick}>Check Out</Button>
+            <Button className="hw-btn" variant="contained" onClick={handleCheckOutClick}>Check Out</Button>
         </div>
     );
 }
