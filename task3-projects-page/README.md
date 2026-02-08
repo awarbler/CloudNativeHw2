@@ -1,95 +1,155 @@
-# React Projects Page — Task 3 (Cloud-Native Frontend)
-
-## Table of Contents
-
-- [React Projects Page — Task 3 (Cloud-Native Frontend)](#react-projects-page--task-3-cloud-native-frontend)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Features](#features)
-  - [Tech Stack](#tech-stack)
-  - [Component Architecture](#component-architecture)
-    - [Component Responsibilities](#component-responsibilities)
-  - [Project Structure](#project-structure)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation (macOS / Linux)](#installation-macos--linux)
-  - [Running the App](#running-the-app)
-  - [Usage](#usage)
-  - [Troubleshooting](#troubleshooting)
-  - [Future Work](#future-work)
-  - [Acknowledgments](#acknowledgments)
-  - [Author](#author)
-
----
+# Task 3 — Custom React Projects Page
 
 ## Overview
 
-This repository contains the **Task 3: Custom React App** implementation for a cloud-native frontend course. The project implements a reusable **Projects page** that models a simplified hardware checkout interface using React and Material UI.
+This project implements **Task 3: Custom React App** for the Cloud-Native Application Development course. The goal of this assignment was to design and implement a front-end **Projects page** using React that models part of the team project UI.
 
-The application is currently a **frontend-only prototype** that uses hardcoded data stored in React state. The design is intentionally modular so it can be connected to a backend API in a later phase of the course.
+The page allows a user to:
 
----
+* View a list of projects they are authorized to join
+* See hardware sets associated with each project
+* Enter quantities for hardware check-in/check-out
+* Join or leave projects using a state-changing button
 
-## Features
-
-* List of authorized projects displayed dynamically
-* Per-project hardware set display with quantities
-* Controlled input fields for “Enter qty”
-* Check In / Check Out action buttons (UI placeholders)
-* Join / Leave toggle that updates React state
-* Reusable component hierarchy with props passing
-* Layout built with Material UI components
+This implementation is **front-end only** and uses hardcoded data in React state (no database or backend connection).
 
 ---
 
-## Tech Stack
+## Technology Stack
 
-* React (Create React App)
-* Material UI (MUI)
+This project was built using:
 
-  * Card
-  * CardContent
+* **React (Create React App)**
+* **Material UI (MUI)**
+
+  * Card, CardContent
   * Button
   * TextField
-* JavaScript (ES6+)
 
 ---
 
-## Component Architecture
+## Component Structure
+
+The application is organized into the following React components:
 
 ```
 App
 └── Projects
-    ├── ProjectCard (reused per project)
-    │   └── HardwareSetRow (reused per hardware set)
+    ├── ProjectCard (reused for each project)
+    │   └── HardwareSetRow (reused for each hardware set)
 ```
 
 ### Component Responsibilities
 
 **Projects.jsx**
 
-* Owns the `projects` state
-* Implements `handleToggleJoin` to modify state
-* Passes project data and event handlers via props
-* Renders a list of `ProjectCard` components
+* Holds application state (`projects`)
+* Defines `handleToggleJoin` to modify state
+* Maps over projects and renders `ProjectCard`
 
 **ProjectCard.jsx**
 
-* Receives a single `project` object via props
-* Displays project name and authorized users
-* Renders a Join/Leave button
+* Receives a single project via props
+* Displays:
+
+  * Project name
+  * Authorized users
+  * Join/Leave button
 * Maps over `hardwareSets` and renders `HardwareSetRow`
 
 **HardwareSetRow.jsx**
 
-* Receives a `hwSet` object via props
-* Displays hardware name and checkout counts
-* Manages local state for quantity input
-* Provides Check In / Check Out buttons
+* Receives one hardware set via props
+* Displays:
+
+  * Hardware set name and counts
+  * “Enter qty” input
+  * Check In / Check Out buttons
 
 ---
 
-## Project Structure
+## How This Satisfies Task 3 Requirements
+
+| Requirement                                          | How it is met                                            |
+| ---------------------------------------------------- | -------------------------------------------------------- |
+| Use at least two Material UI components              | Card, CardContent, Button, TextField                     |
+| Implement at least two components besides `Projects` | `ProjectCard`, `HardwareSetRow`                          |
+| Reuse a custom component multiple times              | `ProjectCard` and `HardwareSetRow` are both reused       |
+| Pass props parent → child at least twice             | `Projects → ProjectCard`, `ProjectCard → HardwareSetRow` |
+| Custom event handler modifies state                  | `handleToggleJoin` updates `joined` state                |
+
+---
+
+## **Requirement of Stakeholder: Development Setup (Frontend)**
+
+The frontend is built using **Create React App**.
+
+### Step-by-Step (macOS / Linux)
+
+**1. Clone the repository**
+
+```bash
+git clone <your-repo-url>
+cd task3-projects-page
+```
+
+**2. Install dependencies**
+
+```bash
+npm install
+```
+
+**3. Start the development server**
+
+```bash
+npm start
+```
+
+**4. Open in your browser**
+
+```
+http://localhost:3000
+```
+
+You should see:
+
+* Three sample projects
+* Two hardware sets per project
+* A working Join/Leave toggle
+
+---
+
+## How to Run This Project (Later)
+
+### 1) Install dependencies
+
+From inside `task3-projects-page/`:
+
+```bash
+npm install
+```
+
+### 2) Start the development server
+
+```bash
+npm start
+```
+
+Then open your browser to:
+
+```
+http://localhost:3000
+```
+
+You should see the Projects page with:
+
+* Three sample projects
+* Two hardware sets per project
+* Working Join/Leave toggle
+
+---
+
+## Folder Layout
 
 ```
 task3-projects-page/
@@ -109,113 +169,21 @@ task3-projects-page/
 │   │   └── HardwareSetRow.css
 │
 ├── package.json
-└── README.md
+└── README.md   ← (this file)
 ```
 
 ---
 
-## Getting Started
+## Notes
 
-### Prerequisites
-
-* Node.js (LTS recommended)
-  [https://nodejs.org](https://nodejs.org)
-
-### Installation (macOS / Linux)
-
-1. Clone the repository
-
-```bash
-git clone <your-repo-url>
-cd task3-projects-page
-```
-
-2. Install dependencies
-
-```bash
-npm install
-```
-
----
-
-## Running the App
-
-Start the development server:
-
-```bash
-npm start
-```
-
-Then open:
-
-```
-http://localhost:3000
-```
-
-You should see:
-
-* Three sample projects
-* Two hardware sets per project
-* A working Join/Leave toggle
-
----
-
-## Usage
-
-* Click **Join** to join a project
-* Click **Leave** to leave a project
-* Enter a quantity in “Enter qty”
-* Click **Check In** or **Check Out** (currently UI-only placeholders)
-
----
-
-## Troubleshooting
-
-**`npm` not found**
-Install Node.js from [https://nodejs.org](https://nodejs.org)
-
-**Port 3000 already in use**
-
-```bash
-PORT=3001 npm start
-```
-
-**Blank screen**
-
-```bash
-rm -rf node_modules package-lock.json
-npm install
-npm start
-```
-
-**Styles not loading**
-
-* Confirm `App.css` is imported in `App.js`
-* Verify file paths in imports
-
----
-
-## Future Work
-
-* Connect to a backend API
-* Persist project membership
-* Implement real Check In / Check Out logic
-* Add authentication
-* Improve responsive layout
-
----
-
-## Acknowledgments
-
-* Course instructor and teaching team
-* React documentation
-* Material UI documentation
+* This project does **not** include `node_modules` in the submission zip.
+* All project data is currently hardcoded for demonstration purposes.
+* The UI approximates the instructor’s sketch but does not yet connect to a backend.
 
 ---
 
 ## Author
 
-**Anita Woodford**
-Software Engineering Graduate Student
-
-University of Texas at Austin 
+Anita Woodford
+University of Texas at Austin
+Cloud-Native Application Development — Task 3
