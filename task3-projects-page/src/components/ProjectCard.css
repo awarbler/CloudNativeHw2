@@ -25,7 +25,7 @@
 /* right column join leave button*/
 .project-right {
     display:flex;
-    align-items: flex-start;
+    align-items: center ;
 }
 
 /* spacing between cards */
@@ -46,4 +46,6 @@
 /* join leave button styling */
 .join-btn {
     width: 120px;
+    height: auto;
+    min-height: 40px;
 }
