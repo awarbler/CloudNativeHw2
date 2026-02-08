@@ -1,5 +1,16 @@
 # Task 3 — Custom React Projects Page
 
+## Table of Contents
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Component Architecture](#component-architecture)
+- [Task Requirements Fulfillment](#task-requirements-fulfillment)
+- [Installation & Setup](#installation--setup)
+- [Project Structure](#project-structure)
+- [Application Flow (Screenshots)](#application-flow-screenshots)
+- [Available Scripts](#available-scripts)
+
 ## Overview
 
 This project implements Task 3: Custom React App for the Cloud-Native Application Development course. The goal of this assignment was to design and implement a front-end Projects page using React that models part of a team project management UI.
