@@ -1,9 +1,13 @@
-import { useState } from "react"; // Make projects in state 
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { useState } from "react"; // Make projects in state
+import { useNavigate } from "react-router-dom";
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem, Typography } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 import ProjectCard from "./ProjectCard";
 import "./Projects.css";
 
 function Projects() { // Define the Projects page component
+    const navigate = useNavigate();
+    const currentUser = localStorage.getItem("currentUser");
 
     // global hardware inventory - shared
     const [hardwareInventory, setHardwareInventory] = useState({
@@ -103,15 +107,39 @@ function Projects() { // Define the Projects page component
         setOpenAuthRequest(false);
     }
 
+    // sign out function 
+    function handleSignOut() {
+        if (window.confirm("Are you sure you want to sign out?")) {
+            localStorage.removeItem("currentUser");
+            navigate("/");
+        }
+    }
+
+
 
 
     return (
         <div className="projects-page">
             <div className="projects-header">
-                <h1>Projects</h1> {/* page title */}
+                <div className="header-left">
+                    <h1>Projects</h1> {/* page title */}
+                    {currentUser && (
+                        <Typography variant="body2" color="textSecondary">
+                            Welcome, {currentUser}! {/* display current user */}
+                        </Typography>
+                    )}
+                </div>
                 <div className="header-buttons">
                     <Button variant="outlined" color="primary" onClick={() => setOpenAuthRequest(true)}>Request Authorization</Button>
                     <Button variant="contained" color="primary" onClick={() => setOpenNewProject(true)}>New Project</Button>
+                    <Button
+                        variant="outlined"
+                        color="error"
+                        startIcon={<LogoutIcon />}
+                        onClick={handleSignOut}
+                    >
+                        Sign Out
+                    </Button>
                 </div>
             </div>
             
@@ -142,10 +170,10 @@ function Projects() { // Define the Projects page component
                 <DialogTitle>Request Authorization</DialogTitle>
                 <DialogContent>
                     <TextField autoFocus margin="dense" label="Your Name" type="text" fullWidth variant="outlined" value={userName} onChange={(e) => setUserName(e.target.value)} style={{marginBottom:"16px",marginTop:"8px"}}/>
-                    <TextField select margin="dense" label="Select Project" fullWidth variant="outlined" value={selectedProjectId} onChange={(e) => setSelectedProjectId(e.target.value)} SelectProp={{ native: true,}}>
-                        <option value=""></option>
+                    <TextField select margin="dense" label="Select Project" fullWidth variant="outlined" value={selectedProjectId} onChange={(e) => setSelectedProjectId(e.target.value)} >
+                        <MenuItem value="">Select a project </MenuItem>
                         {projects.map((p) => (
-                            <option key={p.id} value={p.id}>{p.name}</option>
+                            <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
                         ))}
                     </TextField>
                 </DialogContent>

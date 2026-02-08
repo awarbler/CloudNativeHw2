@@ -22,7 +22,7 @@
     width: 120px;
 }
 /* media */
-@media (max-width: (768px) {
+@media (max-width: 768px) {
     .hw-row {
         flex-direction: column;
         align-items: stretch;
