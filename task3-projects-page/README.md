@@ -152,6 +152,8 @@ You should see the Projects page with:
 ## Folder Layout
 
 ```
+Folder Layout
+
 task3-projects-page/
 │
 ├── public/
@@ -160,6 +162,9 @@ task3-projects-page/
 ├── src/
 │   ├── App.js
 │   ├── App.css
+│   ├── index.js
+│   ├── index.css
+│   │
 │   ├── components/
 │   │   ├── Projects.jsx
 │   │   ├── Projects.css
@@ -167,9 +172,14 @@ task3-projects-page/
 │   │   ├── ProjectCard.css
 │   │   ├── HardwareSetRow.jsx
 │   │   └── HardwareSetRow.css
+│   │
+│   └── pages/
+│       ├── SignIn.jsx
+│       └── SignIn.css
 │
 ├── package.json
 └── README.md   ← (this file)
+
 ```
 
 ---
@@ -181,6 +191,17 @@ task3-projects-page/
 * The UI approximates the instructor’s sketch but does not yet connect to a backend.
 
 ---
+
+## Login for Grading
+
+This project does not perform real authentication. Any username and password will be accepted.
+For example:
+- username: top
+- password: a
+or
+- username: a
+- password: a
+
 
 ## Author
 

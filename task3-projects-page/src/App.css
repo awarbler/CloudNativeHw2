@@ -1,10 +1,14 @@
 :root {
-  --bg:#ffffff;
-  --surface:#e5e5e5;
-  --border:#333333;
-  --muted-border:#d2d2d3;
-  --selected:#cfdacb;
-  --text:#111111;
+:root {
+  --bg: #ffffff;        /* white background */
+  --surface: #f3f4f6;   /* light gray panel background */
+  --border: #d1d5db;    /* soft gray border (like sketch) */
+  --muted-border: #e5e7eb;
+  --selected: #e6f4ea;  /* pale green highlight row */
+  --text: #111827;      /* near-black text */
+  --secondary: #6b7280; /* muted gray for “authorized users” */
+  --primary: #1976d2;   /* Material UI default blue (teacher-like) */
+}
 }
 
 .App {
