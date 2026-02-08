@@ -1,70 +1,221 @@
-# Getting Started with Create React App
+# React Projects Page — Task 3 (Cloud-Native Frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [React Projects Page — Task 3 (Cloud-Native Frontend)](#react-projects-page--task-3-cloud-native-frontend)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+  - [Component Architecture](#component-architecture)
+    - [Component Responsibilities](#component-responsibilities)
+  - [Project Structure](#project-structure)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation (macOS / Linux)](#installation-macos--linux)
+  - [Running the App](#running-the-app)
+  - [Usage](#usage)
+  - [Troubleshooting](#troubleshooting)
+  - [Future Work](#future-work)
+  - [Acknowledgments](#acknowledgments)
+  - [Author](#author)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This repository contains the **Task 3: Custom React App** implementation for a cloud-native frontend course. The project implements a reusable **Projects page** that models a simplified hardware checkout interface using React and Material UI.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application is currently a **frontend-only prototype** that uses hardcoded data stored in React state. The design is intentionally modular so it can be connected to a backend API in a later phase of the course.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+* List of authorized projects displayed dynamically
+* Per-project hardware set display with quantities
+* Controlled input fields for “Enter qty”
+* Check In / Check Out action buttons (UI placeholders)
+* Join / Leave toggle that updates React state
+* Reusable component hierarchy with props passing
+* Layout built with Material UI components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* React (Create React App)
+* Material UI (MUI)
 
-### `npm run eject`
+  * Card
+  * CardContent
+  * Button
+  * TextField
+* JavaScript (ES6+)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Component Architecture
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+App
+└── Projects
+    ├── ProjectCard (reused per project)
+    │   └── HardwareSetRow (reused per hardware set)
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Component Responsibilities
 
-## Learn More
+**Projects.jsx**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Owns the `projects` state
+* Implements `handleToggleJoin` to modify state
+* Passes project data and event handlers via props
+* Renders a list of `ProjectCard` components
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**ProjectCard.jsx**
 
-### Code Splitting
+* Receives a single `project` object via props
+* Displays project name and authorized users
+* Renders a Join/Leave button
+* Maps over `hardwareSets` and renders `HardwareSetRow`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**HardwareSetRow.jsx**
 
-### Analyzing the Bundle Size
+* Receives a `hwSet` object via props
+* Displays hardware name and checkout counts
+* Manages local state for quantity input
+* Provides Check In / Check Out buttons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+task3-projects-page/
+│
+├── public/
+│   └── index.html
+│
+├── src/
+│   ├── App.js
+│   ├── App.css
+│   ├── components/
+│   │   ├── Projects.jsx
+│   │   ├── Projects.css
+│   │   ├── ProjectCard.jsx
+│   │   ├── ProjectCard.css
+│   │   ├── HardwareSetRow.jsx
+│   │   └── HardwareSetRow.css
+│
+├── package.json
+└── README.md
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Getting Started
 
-### Deployment
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* Node.js (LTS recommended)
+  [https://nodejs.org](https://nodejs.org)
 
-### `npm run build` fails to minify
+### Installation (macOS / Linux)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd task3-projects-page
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Running the App
+
+Start the development server:
+
+```bash
+npm start
+```
+
+Then open:
+
+```
+http://localhost:3000
+```
+
+You should see:
+
+* Three sample projects
+* Two hardware sets per project
+* A working Join/Leave toggle
+
+---
+
+## Usage
+
+* Click **Join** to join a project
+* Click **Leave** to leave a project
+* Enter a quantity in “Enter qty”
+* Click **Check In** or **Check Out** (currently UI-only placeholders)
+
+---
+
+## Troubleshooting
+
+**`npm` not found**
+Install Node.js from [https://nodejs.org](https://nodejs.org)
+
+**Port 3000 already in use**
+
+```bash
+PORT=3001 npm start
+```
+
+**Blank screen**
+
+```bash
+rm -rf node_modules package-lock.json
+npm install
+npm start
+```
+
+**Styles not loading**
+
+* Confirm `App.css` is imported in `App.js`
+* Verify file paths in imports
+
+---
+
+## Future Work
+
+* Connect to a backend API
+* Persist project membership
+* Implement real Check In / Check Out logic
+* Add authentication
+* Improve responsive layout
+
+---
+
+## Acknowledgments
+
+* Course instructor and teaching team
+* React documentation
+* Material UI documentation
+
+---
+
+## Author
+
+**Anita Woodford**
+Software Engineering Graduate Student
+
+University of Texas at Austin 
