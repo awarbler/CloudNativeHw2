@@ -1,0 +1,48 @@
+import {Card, CardContent, Button} from "@mui/material";
+import HardwareSetRow from "./HardwareSetRow";
+
+import "./Projects.css"; // Import the Projects page styles from the same folder
+import "./ProjectCard.css"; // Import ProjectCard-specific styles from the same folder
+
+
+
+function ProjectCard(props) {
+    // reusable
+    const { project, hardwareInventory, onToggleJoin, onHardwareUpdate} = props;
+
+    return (
+    <Card variant="outlined" className={`project-card ${project.joined ? 'joined' : ''}`}>
+        <CardContent>
+            <div className="project-row">
+                <div className="project-left"> {/* left column container */}
+                    <div className="project-title-row"> {/* name + users in one row */}
+                        <div className="project-name">{project.name}</div> {/* project name */}
+                        <div className="project-users">{project.authorizedUsers}</div> {/* users list */}
+                    </div>
+                </div>
+
+                <div className="project-middle">
+                    {project.hardwareSets.map((hardwareSetName) => (
+                        <HardwareSetRow 
+                            key={hardwareSetName} 
+                            hardwareSetName={hardwareSetName} 
+                            hwSet={hardwareInventory[hardwareSetName]} 
+                            onHardwareUpdate={onHardwareUpdate}
+                            isJoined={project.joined}
+                            projectId={project.id} 
+                        />
+                    ))}
+                </div>
+
+                <div className="project-right">
+                    <Button onClick={() => onToggleJoin(project.id)}>
+                        {project.joined ? "Leave" : "Join"} 
+                    </Button>
+                </div>
+            </div>
+        </CardContent>
+    </Card>
+    );
+}
+
+export default ProjectCard;

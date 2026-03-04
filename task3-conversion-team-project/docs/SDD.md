@@ -143,8 +143,6 @@ Needs Assignments: Hardware module implementation, API endpoints, testing deploy
 │  │ - users collection: Account & credentials                │   │
 │  │ - projects collection: Project definitions               │   │
 │  │ - hardware_sets collection: Hardware inventory           │   │
-│  │ - resource_requests collection: Request tracking         │   │
-│  │ - allocations collection: Checkout/check-in history      │   │
 │  └──────────────────────────────────────────────────────────┘   │
 │                    (Port 27017)                                 │
 │  - Persistent volume for data durability                        │
@@ -493,6 +491,7 @@ This module MUST be created to handle hardware resource management. Based on the
   hwSetId: String (unique: "HWSet1", "HWSet2", etc.),
   name: String,
   capacity: Integer (total available units),
+  checkedOut: Integer (currently checked out, default 0),
   specifications: {
     cpu: String,
     ram: String,
@@ -501,64 +500,34 @@ This module MUST be created to handle hardware resource management. Based on the
 }
 ```
 
-**resource_requests**:
-```
-{
-  _id: ObjectId,
-  projectId: String,
-  userId: String,
-  hwSet: String (reference to hwSetId),
-  quantityRequested: Integer,
-  status: String (enum: "pending", "approved", "checkout"),
-  timestamp: ISODate
-}
-```
-
-**allocations**:
-```
-{
-  _id: ObjectId,
-  projectId: String,
-  userId: String,
-  hwSet: String,
-  units: Integer,
-  type: String (enum: "checkout", "checkin"),
-  timestamp: ISODate,
-  status: String (enum: "active", "returned")
-}
-```
-
 **Required Endpoints**:
 
 | Method | Endpoint | Purpose | Status |
 |--------|----------|---------|--------|
 | GET | /api/hardware | List all hardware sets | NEED |
-| POST | /api/hardware/request | Request hardware resources | NEED |
 | POST | /api/hardware/checkout | Checkout resources | NEED |
 | POST | /api/hardware/checkin | Check-in resources | NEED |
 | GET | /api/hardware/availability | Get available units per set | NEED |
-| GET | /api/hardware/allocations | View allocation history | NEED |
 
 **Business Logic Requirements**:
 1. **Capacity Management**: 
-   - Calculate available = totalCapacity - allocatedUnits
-   - Use MongoDB `$inc` operator for atomic availability updates
-   - Prevent over-allocation at checkout time
+   - Track `checkedOut` directly on hardware_sets collection
+   - Calculate available = capacity - checkedOut
+   - Use MongoDB `$inc` operator for atomic updates
+   - Prevent over-checkout at checkout time
 
 2. **Availability Calculation**:
-   - Real-time computation based on active allocations
-   - Aggregate sum of allocated units by hardware set
+   - Direct read from hardware_sets.checkedOut field
    - Return in dashboard-friendly format
 
-3. **Request Workflow**:
-   - pending → approved → checkout → checkin
+3. **Checkout/Checkin Flow**:
    - Validate requested quantity ≤ available
-   - Prevent duplicate checkout without return
+   - Increment checkedOut on checkout
+   - Decrement checkedOut on checkin (min 0)
 
 4. **Atomic Operations**:
-   - Use MongoDB atomic operations for concurrent safety
-   - Increment/decrement available units via $inc operator
-   - MongoDB transactions for multi-step operations if needed
+   - Use MongoDB `$inc` for concurrent safety
+   - Single collection update per operation
 
 ### 3.4 Error Handling Strategy
 
@@ -876,22 +845,17 @@ type HardwareAvailability = {
   utilizationPercent: number;
 };
 
-type ResourceRequest = {
-  _id?: string;
+type CheckoutRequest = {
   projectId: string;
-  hwSet: string;
-  quantityRequested: number;
-  status: string;       // pending, approved, checkout, checkin
+  hardwareSet: string;
+  units: number;
 };
 
-type Allocation = {
-  _id?: string;
-  projectId: string;
-  hwSet: string;
-  units: number;
-  type: string;         // checkout, checkin
-  timestamp: string;
-  status: string;       // active, returned
+type CheckoutResponse = {
+  ok: boolean;
+  hardwareSet: string;
+  checkedOut: number;
+  available: number;
 };
 ```
 
@@ -905,21 +869,13 @@ hardwareApi.getAvailability()
   // GET /api/hardware/availability
   // Returns: HardwareAvailability[]
 
-hardwareApi.requestResources(request: ResourceRequest)
-  // POST /api/hardware/request
-  // Returns: ResourceRequest with generated ID
-
-hardwareApi.checkout(request: ResourceRequest)
+hardwareApi.checkout(request: CheckoutRequest)
   // POST /api/hardware/checkout
-  // Returns: Allocation
+  // Returns: CheckoutResponse
 
-hardwareApi.checkin(allocationId: string)
+hardwareApi.checkin(request: CheckoutRequest)
   // POST /api/hardware/checkin
-  // Returns: Allocation with checkinTime
-
-hardwareApi.getAllocations(projectId?: string)
-  // GET /api/hardware/allocations?projectId=<id>
-  // Returns: Allocation[]
+  // Returns: CheckoutResponse
 ```
 
 #### 4.3.5 Page Components

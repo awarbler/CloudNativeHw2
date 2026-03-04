@@ -265,38 +265,6 @@ Get real-time availability status.
 ]
 ```
 
-### POST /api/hardware/request
-Create a hardware request (for approval workflow).
-
-**Status:** NEED TO BUILD
-
-**Request:**
-```json
-{
-  "projectId": "string (project requesting hardware)",
-  "hardwareSet": "string (e.g., HWSet1)",
-  "units": "integer (quantity requested)",
-  "reason": "string (optional - reason for request)"
-}
-```
-
-**Response (201):**
-```json
-{
-  "requestId": "string",
-  "projectId": "string",
-  "hardwareSet": "string",
-  "units": "integer",
-  "status": "pending|approved|denied",
-  "createdAt": "ISO8601 timestamp"
-}
-```
-
-**Implementation Notes:**
-- TODO: Currently designed for auto-approval
-- TODO: Implement approval workflow if needed
-- Validate available capacity before approval
-
 ### POST /api/hardware/checkout
 Check out hardware units.
 
@@ -314,12 +282,10 @@ Check out hardware units.
 **Response (200):**
 ```json
 {
-  "allocationId": "string",
-  "projectId": "string",
+  "ok": true,
   "hardwareSet": "string",
-  "units": "integer",
-  "type": "checkout",
-  "checkedOutAt": "ISO8601 timestamp"
+  "checkedOut": "integer (new total checked out)",
+  "available": "integer (remaining available)"
 }
 ```
 
@@ -334,10 +300,9 @@ Check out hardware units.
 ```
 
 **Implementation Notes:**
-- Use MongoDB `$inc` operator for atomic updates (prevent overallocation)
+- Use MongoDB `$inc` operator for atomic updates
 - Check available capacity before checkout
-- Record allocation in `allocations` collection
-- TODO: Add per-unit tracking if needed
+- Update checkedOut field directly on hardware_sets
 
 ### POST /api/hardware/checkin
 Check in hardware units.
@@ -356,43 +321,17 @@ Check in hardware units.
 **Response (200):**
 ```json
 {
-  "allocationId": "string",
-  "projectId": "string",
+  "ok": true,
   "hardwareSet": "string",
-  "units": "integer",
-  "type": "checkin",
-  "checkedInAt": "ISO8601 timestamp"
+  "checkedOut": "integer (new total checked out)",
+  "available": "integer (remaining available)"
 }
 ```
 
 **Implementation Notes:**
 - Use MongoDB `$inc` operator for atomic updates
-- Validate that project has checked out the requested quantity
-- Record return in `allocations` collection
-- Update `projectAllotments` in hardware_sets collection
-
-### GET /api/hardware/allocations
-Get allocation history for a project.
-
-**Status:**  NEED TO BUILD
-
-**Query Parameters:**
-- `?projectId={projectId}` - Filter by project (required)
-
-**Response (200):**
-```json
-[
-  {
-    "allocationId": "string",
-    "projectId": "string",
-    "userId": "string",
-    "hardwareSet": "string",
-    "units": "integer",
-    "type": "checkout|checkin",
-    "timestamp": "ISO8601 timestamp"
-  }
-]
-```
+- Validate checkedOut >= units (can't return more than checked out)
+- Update checkedOut field directly on hardware_sets
 
 ---
 
@@ -492,10 +431,8 @@ For list endpoints that return many results:
 | /api/projects/{projectId} | GET | [BUILD] | MEDIUM |
 | /api/hardware | GET | [NEED] | HIGH |
 | /api/hardware/availability | GET | [NEED] | HIGH |
-| /api/hardware/request | POST | [NEED] | HIGH |
 | /api/hardware/checkout | POST | [NEED] | HIGH |
 | /api/hardware/checkin | POST | [NEED] | HIGH |
-| /api/hardware/allocations | GET | [NEED] | HIGH |
 | /api/health | GET | [DONE] | - |
 
 ---

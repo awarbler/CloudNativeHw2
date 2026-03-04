@@ -1,10 +1,11 @@
 import {Card, CardContent, Button} from "@mui/material";
 import HardwareSetRow from "./HardwareSetRow";
+
 import "./ProjectCard.css";
 
 function ProjectCard(props) {
     // reusable
-    const {project, hardwareInventory, onToggleJoin, onHardwareUpdate} = props;
+    const { project, hardwareInventory, onToggleJoin, onHardwareUpdate} = props;
 
     return (
     <Card variant="outlined" className={`project-card ${project.joined ? 'joined' : ''}`}>
@@ -31,12 +32,10 @@ function ProjectCard(props) {
                 </div>
 
                 <div className="project-right">
-                    <Button className="join-btn" variant="contained" color="primary" onClick={() => onToggleJoin(project.id)}>
-                        {project.joined ? "Leave" : "Join"}
+                    <Button onClick={() => onToggleJoin(project.id)}>
+                        {project.joined ? "Leave" : "Join"} 
                     </Button>
                 </div>
-
-
             </div>
         </CardContent>
     </Card>
